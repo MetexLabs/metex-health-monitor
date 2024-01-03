@@ -2,7 +2,7 @@ from petals.constants import PUBLIC_INITIAL_PEERS
 
 from data_structures import ModelInfo
 
-INITIAL_PEERS = PUBLIC_INITIAL_PEERS
+INITIAL_PEERS = INITIAL_PEERS = ['/ip4/45.79.153.218/tcp/31337/p2p/QmXfANcrDYnt5LTXKwtBP5nsTMLQdgxJHbK3L1hZdFN8km']
 
 MODELS = [
     ModelInfo(

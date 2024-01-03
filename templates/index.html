@@ -1,87 +1,82 @@
 <!doctype html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=1024">
-  <link rel="icon" class="js-site-favicon" type="image/png" href="./static/logo.svg">
-  <title>Petals Health Monitor</title>
-  <link href="./static/health.css" rel="stylesheet">
+  <link rel="icon" class="js-site-favicon" type="image/png" href="./logo.jpg">
+  <title>METEX LABS Health Monitor</title>
+  <link href="../static/health.css" rel="stylesheet">
 </head>
 <body>
-
-<header>
-  <div class="logo">
-    <a target="_blank" href="https://petals.dev"><img src="./static/logo.svg" height="50" class="rot-image"></a>
-  </div>
-  <h1>Petals <span style="font-size: 13pt; color: #aaa;">Health Monitor</span></h1>
-</header>
-
-<main>
-
-{% set state_chars = dict(offline="_", unreachable="✖", joining="●", online="●") %}
-<section>
-  <p>
-    Bootstrap peers:
-    <span class="bootstrap-map">
-      {% for state in bootstrap_states %}<span class="{{ state }}">{{ state_chars[state] }}</span>{% endfor %}
-    </span>
-  </p>
-</section>
-
-<section>
-  <p>
-    Swarm:
-    <span class="toc">
+ 
+  <header>
+    <div class="logo">
+      <a target="_blank" href="https://metex.co"><img src="../static/logo.jpg" height="50" width="50" alt="METEX LOGO"></a>
+    </div>
+    <h1>METEX LABS <span class="health-monitor-title">Health Monitor</span></h1>
+  </header>
+ 
+  <main class="container">
+    {% set state_chars = dict(offline="_", unreachable="✖", joining="●", online="●") %}
+    <section>
+      <div class="subtitle">
+        <h2>Bootstrap peers:</h2>
+        <span class="bootstrap-map">
+          {% for state in bootstrap_states %}
+          <span class="{{ state }}">{{ state_chars[state] }}</span>
+          {% endfor %}
+        </span>
+      </div>
+    </section>
+    <section>
+      <div class="subtitle">
+        <h2>Swarm:</h2>
+        <span class="toc">
+          {% for model in model_reports %}
+          <a class="{{ model.state }}" href="#{{ model.short_name }}" title="DHT prefix: {{ model.dht_prefix }}">{{ model.short_name }}</a>
+          {% if not loop.last %}<span class="bull">&bull;</span>{% endif %}
+          {% endfor %}
+        </span>
+      </div>
+    </section>
+    <section>
+      <div class="subtitle">
+        <h2>Top contributors:</h2>
+        <span class="top-contributors">
+          {% for name, num_blocks in top_contributors.most_common(5) %}
+          <span class="entry">
+            <span class="name">
+              {% if name.startswith('http://') or name.startswith('https://') %}
+              <a target="_blank" href="{{ name }}">{{ name.replace('http://', '').replace('https://', '').rstrip('/') | truncate(20, True, '…') }}</a>
+              {% else %}
+              {{ name|truncate(20, True, '…') }}
+              {% endif %}
+            </span>
+            <span class="num-blocks gray">({{ num_blocks }} blocks)</span>
+          </span>
+          {% if not loop.last %}<span class="bull">&bull;</span>{% endif %}
+          {% endfor %}
+        </span>
+      </div>
+    </section>
     {% for model in model_reports %}
-    <a class="{{ model.state }}" href="#{{ model.short_name }}" title="DHT prefix: {{ model.dht_prefix }}">{{ model.short_name }}</a>
-    {% if not loop.last %}<span class="bull">&bull;</span>{% endif %}
-    {% endfor %}
-    </span>
-  </p>
-</section>
-
-<section>
-  <p>
-    Top contributors:
-    <span class="top-contributors">
-    {% for name, num_blocks in top_contributors.most_common(5) %}
-    <span class="entry">
-      <span class="name">
-        {% if name.startswith('http://') or name.startswith('https://') %}
-        <a target="_blank" href="{{ name }}">{{ name.replace('http://', '').replace('https://', '').rstrip('/') | truncate(20, True, '…') }}</a>
-        {% else %}
-        {{ name|truncate(20, True, '…') }}
-        {% endif %}
-      </span>
-      <span class="num-blocks gray">({{ num_blocks }} blocks)</span>
-    </span>
-    {% if not loop.last %}<span class="bull">&bull;</span>{% endif %}
-    {% endfor %}
-    </span>
-  </p>
-</section>
-
-{% for model in model_reports %}
-<section id="{{ model.short_name }}">
-  <p>
-    Model
-    <a target="_blank" href="{{ model.repository }}" title="DHT prefix: {{ model.dht_prefix }}">{{ model.name }}</a>
-    (<span class="{{ model.state }}">{{ model.state }}</span>):
-  </p>
-
-  {% if not model.official %}
-  <p class="hint">This model is <b>not</b> officially supported. Use it at your own risk.</p>
-  {% endif %}
-
-  {% if model.limited %}
-  <p class="hint">
-    This model is supposed to be used by our <a target="_blank" href="https://chat.petals.dev">chatbot app</a> only.
-    We do not provide a public API for this model due to
-    <a target="_blank" href="https://huggingface.co/spaces/tiiuae/falcon-180b-license/blob/main/LICENSE.txt">license</a> restrictions.
-  </p>
-  {% endif %}
-
+    <section id="{{ model.short_name }}">
+      <div class="subtitle">
+        <h2>Model</h2>
+        <a target="_blank" href="{{ model.repository }}" title="DHT prefix: {{ model.dht_prefix }}">{{ model.name }}</a>
+        (<span class="{{ model.state }}">{{ model.state }}</span>):
+      </div>
+      {% if not model.official %}
+      <p class="hint">This model is <b>not</b> officially supported. Use it at your own risk.</p>
+      {% endif %}
+      {% if model.limited %}
+      <p class="hint">
+        This model is supposed to be used by our chatbot app only.
+        We do not provide a public API for this model due to
+        <a target="_blank" href="https://huggingface.co/spaces/tiiuae/falcon-180b-license/blob/main/LICENSE.txt">license</a> restrictions.
+      </p>
+      {% endif %}
+<div class="table-container">
   <table class="servers">
     <thead>
       <tr>
@@ -158,69 +153,58 @@
       {% endfor %}
     </tbody>
   </table>
-
-  {% if model.state == "broken" %}
-  <p class="hint">
-    <b>Not enough servers?</b>
-    <a target="_blank" href="https://github.com/bigscience-workshop/petals#connect-your-gpu-and-increase-petals-capacity">Connect your GPU</a>
-    and increase Petals capacity!
-  </p>
-  {% endif %}
-</section>
-{% endfor %}
-
-<section>
-  <p>Legend:</p>
-
-  <table class="legend">
-    <thead>
-      <tr><td colspan="2">Status</td><td>Description</td></tr>
-    </thead>
-    <tbody>
-      <tr><td class="online">●</td><td>online</td><td>Up and running</td></tr>
-      <tr><td class="joining">●</td><td>joining</td><td>Loading blocks, joining soon</td></tr>
-      <tr><td class="unreachable">✖</td><td>unreachable</td><td>Unreachable from the Internet, see "Reachability issues" below</td></tr>
-      <tr><td class="offline">_</td><td>offline</td><td>Disconnected a few minutes ago</td></tr>
-    </tbody>
-  </table>
-</section>
-
-{% if reachability_issues %}
-<section>
-  <p>Reachability issues:</p>
-  <p class="hint">
-    Servers may be unreachable due to port forwarding/NAT/firewall issues.
-    Normally, they should become reachable in a few minutes, once they join
-    a <a href="https://docs.libp2p.io/concepts/nat/circuit-relay/">libp2p circuit relay</a>.
-    If your server fails to do that, please ask for help
-    in the <b><a target="_blank" href="https://discord.gg/X7DgtxgMhc">#running-a-server</a></b> channel of our Discord.
-  </p>
-
-  <table>
-    <thead>
-      <tr><td>Peer ID</td><td>Error message</td></tr>
-    </thead>
-    <tbody>
-      {% for row in reachability_issues %}
-      <tr>
-        <td>{{ row.peer_id }}</td>
-        <td class="error-message">{{ row.err }}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</section>
-{% endif %}
-
-</main>
-
-<footer>
-  Last updated: {{ last_updated.strftime('%H:%M:%S') }} UTC (update in {{ update_period }} sec).
-  See source code and API docs on <a target="_blank" href="https://github.com/petals-infra/health.petals.dev">GitHub</a>.
-</footer>
-
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
-<script src="./static/health.js?v=3"></script>
-
+</div>
+    </section>
+    {% endfor %}
+    <section>
+      <p>Legend:</p>
+<div class="table-container">      <table class="legend">
+  <thead>
+    <tr><td colspan="2">Status</td><td>Description</td></tr>
+  </thead>
+  <tbody>
+    <tr><td class="online">●</td><td>online</td><td>Up and running</td></tr>
+    <tr><td class="joining">●</td><td>joining</td><td>Loading blocks, joining soon</td></tr>
+    <tr><td class="unreachable">✖</td><td>unreachable</td><td>Unreachable from the Internet, see "Reachability issues" below</td></tr>
+    <tr><td class="offline">_</td><td>offline</td><td>Disconnected a few minutes ago</td></tr>
+  </tbody>
+</table></div>
+    </section>
+    {% if reachability_issues %}
+    <section>
+      <p>Reachability issues:</p>
+      <p class="hint">
+        Servers may be unreachable due to port forwarding/NAT/firewall issues.
+        Normally, they should become reachable in a few minutes, once they join
+        a <a href="https://docs.libp2p.io/concepts/nat/circuit-relay/">libp2p circuit relay</a>.
+        If your server fails to do that, please ask for help
+        in the <b><a target="_blank" href="https://discord.gg/X7DgtxgMhc">#running-a-server</a></b> channel of our Discord.
+      </p>
+      <table>
+        <thead>
+          <tr><td>Peer ID</td><td>Error message</td></tr>
+        </thead>
+        <tbody>
+          {% for row in reachability_issues %}
+          <tr>
+            <td>{{ row.peer_id }}</td>
+            <td class="error-message">{{ row.err }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+    {% endif %}
+  </main>
+ 
+  <footer>
+    Last updated: {{ last_updated.strftime('%H:%M:%S') }} UTC (update in {{ update_period }} sec).
+    See source code and API docs on <a target="_blank" href="https://github.com/MetexLabs/metex-health-monitor">GitHub</a>.
+  </footer>
+ 
+ 
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+  <script src="../static/health.js"></script>
 </body>
 </html>
+ 
