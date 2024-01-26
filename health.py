@@ -76,7 +76,7 @@ def fetch_health_state(dht: hivemind.DHT) -> dict:
             if state == "online":
                 block_healthy[span.start : span.end] = True
 
-            show_public_name = state == "online" and span.length >= 10
+            show_public_name = True
             if model.official and span.server_info.public_name and show_public_name:
                 top_contributors[span.server_info.public_name] += span.length
 
