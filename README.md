@@ -29,6 +29,11 @@ The GPU Health Monitor is a tool designed to provide real-time information about
    ```bash
    cd metex-health-monitor
    ```
+   
+3. Navigate to the project directory:
+   ```bash
+   cd metex-health-monitor
+   ```
 
 3. Install dependencies:
    ```bash
