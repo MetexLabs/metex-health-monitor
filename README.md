@@ -18,7 +18,7 @@ The GPU Health Monitor is a tool designed to provide real-time information about
 
 - **Network Connectivity**: Monitor GPUs across the network, making it easy to keep an eye on multiple machines from a central location.
 
-## Running the Monitor on a WSL Env
+## Running the Monitor on a WSL Env ( More RELIABLE )
 
 1. Clone the repository:
    ```bash
