@@ -22,12 +22,12 @@ The GPU Health Monitor is a tool designed to provide real-time information about
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/gpu-health-monitor.git
+   git clone https://github.com/MetexLabs/metex-health-monitor.git
    ```
 
 2. Navigate to the project directory:
    ```bash
-   cd gpu-health-monitor
+   cd metex-health-monitor
    ```
 
 3. Install dependencies:
