@@ -47,7 +47,7 @@ The GPU Health Monitor is a tool designed to provide real-time information about
    http://localhost:5000
    ```
 
-3. Explore real-time GPU information, usage, and temperature across the network.
+3. Explore real-time GPU information And usage across the network.
 
 ## Dependencies
 
