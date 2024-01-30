@@ -37,13 +37,19 @@ The GPU Health Monitor is a tool designed to provide real-time information about
 
 ## Usage
 
+<details>
 <summary><b>Running with Docker</b></summary>
 
 ```bash
-git clone https://github.com/petals-infra/health.petals.dev
-cd health.petals.dev
+git clone https://github.com/MetexLabs/metex-health-monitor.git
+cd metex-health-monitor
 docker-compose up --build -d
 ```
+</details>
+
+
+Alternate Method >>>
+
 1. Run the health monitor:
    ```bash
    flask run --host=0.0.0.0 --port=5000
