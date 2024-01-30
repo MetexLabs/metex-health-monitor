@@ -40,13 +40,13 @@ The GPU Health Monitor is a tool designed to provide real-time information about
    pip install -r requirements.txt
    ```
 4. Run the Flask Server
-   '''bash
+   ```bash
    flask run --host=0.0.0.0 --port=5000
-   '''
+   ```
 5. Access the Web Browser
-   '''bash
+   ```bash
    http://localhost:5000
-   '''  
+   ```  
       
 
 ## Alternate Usage
