@@ -46,19 +46,18 @@ cd metex-health-monitor
 docker-compose up --build -d
 ```
 </details>
+#########
+<details>
+<summary><b>Running with Wsl </b></summary>
 
-
-Alternate Method >>>
-
-1. Run the health monitor:
-   ```bash
-   flask run --host=0.0.0.0 --port=5000
-   ```
-
-2. Access the monitor interface via a web browser:
-   ```
-   http://localhost:5000
-   ```
+```bash
+git clone https://github.com/MetexLabs/metex-health-monitor.git
+cd metex-health-monitor
+pip install -r requirements.txt
+flask run --host=0.0.0.0 --port=5000
+*Acces the local host on*  http://localhost:5000
+```
+</details>
 
 3. Explore real-time GPU information And usage across the network.
 
