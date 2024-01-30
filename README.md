@@ -34,8 +34,17 @@ The GPU Health Monitor is a tool designed to provide real-time information about
    ```bash
    pip install -r requirements.txt
    ```
+4. Run the Flask Server
+   '''bash
+   flask run --host=0.0.0.0 --port=5000
+   '''
+5. Access the Web Browser
+   '''bash
+   http://localhost:5000
+   '''  
+      
 
-## Usage
+## Alternate Usage
 
 <details>
 <summary><b>Running with Docker</b></summary>
@@ -46,20 +55,9 @@ cd metex-health-monitor
 docker-compose up --build -d
 ```
 </details>
-#########
-<details>
-<summary><b>Running with Wsl </b></summary>
 
-```bash
-git clone https://github.com/MetexLabs/metex-health-monitor.git
-cd metex-health-monitor
-pip install -r requirements.txt
-flask run --host=0.0.0.0 --port=5000
-*Acces the local host on*  http://localhost:5000
-```
-</details>
 
-3. Explore real-time GPU information And usage across the network.
+O: Explore real-time GPU information And usage across the network.
 
 ## Dependencies
 
