@@ -16,7 +16,6 @@ MODELS = [
         dht_prefix="deepseek-coder-33b-instruct",
         repository="https://huggingface.co/deepseek-ai/deepseek-coder-33b-instruct",
         num_blocks=80,
-        limited=False,
         ),
 ]
 
