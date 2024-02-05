@@ -1,4 +1,4 @@
-from petals.constants import PUBLIC_INITIAL_PEERS
+from petals.constants import INITIAL_PEERS
 
 from data_structures import ModelInfo
 
